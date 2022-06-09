@@ -1,4 +1,4 @@
-console.log('FIB ===========================');
+console.log('FIB ====================');
 
 
 // Brute Force [ O(2^n) ]
@@ -19,7 +19,7 @@ console.log(fib(800))
 
 
 
-console.log('GRID TRAVELER ==================');
+console.log('GRID TRAVELER =======================');
 
 // Brute force [ O(2^(n + m)) ]
 // const gridTraveler = (m, n) => {
@@ -117,4 +117,56 @@ const howSum = (targetSum, numbers, memo = {}) => {
 }
 
 console.log(howSum(7, [5, 3, 4, 7]));
-console.log(howSum(300, [7, 14]));
+// console.log(howSum(300, [7, 14]));
+
+
+console.log('BEST SUM =======================');
+
+// Brute Force [ O(n^m * m) ]
+// const bestSum = (targetSum, numbers) => {
+//     if (targetSum === 0) return [];
+//     if (targetSum < 0) return null;
+
+//     let shortestCombination = null
+
+//     for (let num of numbers){
+//         const remainder = targetSum - num;
+//         const remainderCombination = bestSum(remainder, numbers);
+//         if (remainderCombination !== null){
+//             const combination = [ ...remainderCombination, num ]
+//             // if the combination is shorter than the current "shortest", update it
+//             if (shortestCombination === null || combination.length < shortestCombination.length){
+//                 shortestCombination = combination;
+//             }
+//         }
+//     }
+//     return shortestCombination
+// };
+
+// Memoized [ O(m^2 * 2)]
+const bestSum = (targetSum, numbers, memo = {}) => {
+    if (targetSum in memo) return memo[targetSum];
+    if (targetSum === 0) return [];
+    if (targetSum < 0) return null;
+
+    let shortestCombination = null
+
+    for (let num of numbers){
+        const remainder = targetSum - num;
+        const remainderCombination = bestSum(remainder, numbers, memo);
+        if (remainderCombination !== null){
+            const combination = [ ...remainderCombination, num ]
+            // if the combination is shorter than the current "shortest", update it
+            if (shortestCombination === null || combination.length < shortestCombination.length){
+                shortestCombination = combination;
+            }
+        }
+    }
+    memo[targetSum] = shortestCombination
+    return shortestCombination
+};
+
+
+console.log(bestSum(7, [5, 3, 4, 7]));
+console.log(bestSum(100, [1, 2, 5, 25]));
+
