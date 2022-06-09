@@ -15,21 +15,20 @@ const fib = (n, memo = {}) => {
     memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
     return memo[n];
 }
-
 console.log(fib(800))
 
 
 
 console.log('GRID TRAVELER ==================');
 
-// Brute force [ O(2^(n+m)) ]
+// Brute force [ O(2^(n + m)) ]
 // const gridTraveler = (m, n) => {
 //     if (m === 1 && n === 1) return 1;
 //     if (m === 0 || n === 0) return 0;
 //     return gridTraveler(m - 1, n) + gridTraveler(m, n - 1)
 // }
 
-// Memoization
+// Memoization [ O(n * m)]
 const gridTraveler = (m, n, memo = {}) => {
     // are the args in the memo
     const key = m + ',' + n;
@@ -41,3 +40,40 @@ const gridTraveler = (m, n, memo = {}) => {
 }
 
 console.log(gridTraveler(18, 18))
+
+
+console.log('CAN SUM =======================');
+
+// Brute force [ O(n^m) ]
+// const canSum = (targetSum, numbers) => {
+//     if (targetSum === 0) return true;
+//     if (targetSum < 0) return false;
+
+//     for (let num of numbers){
+//         // console.log(num);
+//         const remainder = targetSum - num;
+//         if (canSum(remainder, numbers) === true){
+//             return true;
+//         } 
+//     }
+
+//     return false;
+// }
+
+// Memoization
+const canSum = (targetSum, numbers) => {
+    if (targetSum === 0) return true;
+    if (targetSum < 0) return false;
+
+    for (let num of numbers){
+        // console.log(num);
+        const remainder = targetSum - num;
+        if (canSum(remainder, numbers) === true){
+            return true;
+        } 
+    }
+
+    return false;
+}
+
+console.log(canSum(7, [2, 3]))
