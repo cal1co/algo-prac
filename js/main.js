@@ -216,7 +216,7 @@ console.log(canConstruct('eeeeeeeeeeeeeeeeeeeeeeeeef', ['e', 'ee', 'eee', 'eeee'
 
 console.log('COUNT CONSTRUCT =======================');
 
-// Brute Force
+// Brute Force [ O(n^m * m) ]
 // const countConstruct = (target, wordBank) => {
 //     if (target === '') return 1;
 
@@ -231,6 +231,7 @@ console.log('COUNT CONSTRUCT =======================');
 //     return totalCount; 
 // }
 
+// Memoized [ O(n * m^2) ]
 const countConstruct = (target, wordBank, memo = {}) => {
     if (target in memo) memo[target];
     if (target === '') return 1;
@@ -249,3 +250,24 @@ const countConstruct = (target, wordBank, memo = {}) => {
 
 console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
 console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
+
+
+console.log('ALL CONSTRUCT =======================');
+
+// Brute Force
+const allConstruct = (target, wordBank) => {
+    if (target === '') return [[]];
+
+    let output = []
+
+    for (let word of wordBank){
+        if (target.indexOf(word) === 0){
+            allConstruct(target.slice(word.length), wordBank)
+        }
+    }
+    return []
+}
+
+console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'efg']))
+// console.log(allConstruct('hello', ['cat', 'dog', 'mouse']))
+// console.log(allConstruct('', ['cat', 'dog', 'mouse']))
