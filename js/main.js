@@ -9,14 +9,24 @@ console.log('FIB ====================');
 
 // Memoization
 //  JS object, keys will be arg to fn, value will be the reuturn value
-const fib = (n, memo = {}) => {
-    if (n in memo) return memo[n];
-    if (n <= 2) return 1;
-    memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
-    return memo[n];
+// const fib = (n, memo = {}) => {
+//     if (n in memo) return memo[n];
+//     if (n <= 2) return 1;
+//     memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+//     return memo[n];
+// }
+
+// Tabulation
+const fib = (n) => {
+    const table = Array(n + 1).fill(0);
+    table[1] = 1;
+    for (let i = 0; i <= n; i++){
+        table[i + 1] += table[i]
+        table[i + 2] += table[i]
+    }
+    return table[n]
 }
 console.log(fib(800))
-
 
 
 console.log('GRID TRAVELER =======================');
@@ -38,8 +48,7 @@ const gridTraveler = (m, n, memo = {}) => {
     memo[key] = gridTraveler(m - 1, n, memo) + gridTraveler(m, n - 1, memo)
     return memo[key]
 }
-
-console.log(gridTraveler(18, 18))
+// console.log(gridTraveler(18, 18))
 
 
 console.log('CAN SUM =======================');
@@ -77,8 +86,7 @@ const canSum = (targetSum, numbers, memo = {}) => {
     memo[targetSum] = false;
     return false;
 }
-
-console.log(canSum(300, [7, 14]))
+// console.log(canSum(300, [7, 14]))
 
 
 console.log('HOW SUM =======================');
@@ -115,8 +123,7 @@ const howSum = (targetSum, numbers, memo = {}) => {
     memo[targetSum] = null
     return null
 }
-
-console.log(howSum(7, [5, 3, 4, 7]));
+// console.log(howSum(7, [5, 3, 4, 7]));
 // console.log(howSum(300, [7, 14]));
 
 
@@ -165,10 +172,8 @@ const bestSum = (targetSum, numbers, memo = {}) => {
     memo[targetSum] = shortestCombination
     return shortestCombination
 };
-
-
-console.log(bestSum(7, [5, 3, 4, 7]));
-console.log(bestSum(100, [1, 2, 5, 25]));
+// console.log(bestSum(7, [5, 3, 4, 7]));
+// console.log(bestSum(100, [1, 2, 5, 25]));
 
 
 
@@ -248,8 +253,8 @@ const countConstruct = (target, wordBank, memo = {}) => {
     return totalCount
 }
 
-console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
-console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
+// console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
+// console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
 
 
 console.log('ALL CONSTRUCT =======================');
@@ -289,8 +294,8 @@ const allConstruct = (target, wordBank, memo = {}) => {
     memo[target] = result;
     return result
 }
-console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
-console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'efg']))
-console.log(allConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
+// console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
+// console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'efg']))
+// console.log(allConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
 // console.log(allConstruct('hello', ['cat', 'dog', 'mouse']))
 // console.log(allConstruct('', ['cat', 'dog', 'mouse']))
