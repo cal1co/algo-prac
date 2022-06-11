@@ -211,3 +211,14 @@ const canConstruct = (target, wordBank, memo = {}) => {
 }
 
 console.log(canConstruct('eeeeeeeeeeeeeeeeeeeeeeeeef', ['e', 'ee', 'eee', 'eeee','eeeee','eeeeee']))
+
+
+
+console.log('COUNT CONSTRUCT =======================');
+
+// Brute Force
+const countConstruct = (target, wordBank) => {
+    if (target === '') return 1;
+}
+
+console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeef", ["e", "ee","eee",'eeee', "eeeee", "eeeeee"]));
