@@ -66,8 +66,7 @@ const gridTraveler = (m, n) => {
     }
     return table[m][n]
 }
-console.log(gridTraveler(1, 1))
-console.log(gridTraveler(18, 18))
+// console.log(gridTraveler(18, 18))
 
 
 console.log('CAN SUM =======================');
@@ -89,23 +88,38 @@ console.log('CAN SUM =======================');
 // }
 
 // Memoization [ O(m*n) ]
-const canSum = (targetSum, numbers, memo = {}) => {
-    if (targetSum in memo) return memo[targetSum];
-    if (targetSum === 0) return true;
-    if (targetSum < 0) return false;
+// const canSum = (targetSum, numbers, memo = {}) => {
+//     if (targetSum in memo) return memo[targetSum];
+//     if (targetSum === 0) return true;
+//     if (targetSum < 0) return false;
 
-    for (let num of numbers){
-        // console.log(num);
-        const remainder = targetSum - num;
-        if (canSum(remainder, numbers, memo) === true){
-            memo[targetSum] = true;
-            return true;
-        } 
+//     for (let num of numbers){
+//         // console.log(num);
+//         const remainder = targetSum - num;
+//         if (canSum(remainder, numbers, memo) === true){
+//             memo[targetSum] = true;
+//             return true;
+//         } 
+//     }
+//     memo[targetSum] = false;
+//     return false;
+// }
+
+// Tabulation
+const canSum = (targetSum, numbers) => {
+    const table = Array(targetSum + 1).fill(false);
+    table[0] = true
+    for (let i = 0; i <= targetSum; i++){
+        if (table[i] === true){
+            numbers.forEach(num => {
+                table[i + num] = true;
+            })
+        }
     }
-    memo[targetSum] = false;
-    return false;
+    return table[targetSum]
 }
-// console.log(canSum(300, [7, 14]))
+console.log(canSum(7, [2, 3])) // true
+console.log(canSum(300, [7, 14])) // false
 
 
 console.log('HOW SUM =======================');
